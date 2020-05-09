@@ -5,6 +5,7 @@
 #include "rgb_lcd.h"
 #include <TimerTC3.h>
 #include "Adafruit_NeoPixel.h"
+#include <Servo.h>
 #ifdef __AVR__
     #include <avr/power.h>
 #endif
@@ -55,6 +56,9 @@ const int colorB = 0;
 // example for more information on possible values.
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 uint8_t dot_num;
+
+Servo myservo;  // create servo object to control a servo
+const int servo_pin = 0;  // analog pin used to connect the potentiometer
 void display_update(rgb_lcd* lcddev,char* str)
 {
   if(!dot_num)lcddev->clear();
@@ -85,9 +89,12 @@ void led_ring_enable(uint8_t led_ring_color)
 }
 void open_door()
 {
-  digitalWrite(RealyPin, HIGH);
+  myservo.write(90);                  // sets the servo position according to the scaled value
   delay(2000);
-  digitalWrite(RealyPin, LOW);
+  myservo.write(0);                  // sets the servo position according to the scaled value
+  // digitalWrite(servo_pin, HIGH);
+  // delay(2000);
+  // digitalWrite(servo_pin, LOW);
 }
 
 void setup() {
@@ -99,9 +106,8 @@ void setup() {
   // set up the TimerTc3 
     TimerTc3.initialize(1000000);
     TimerTc3.attachInterrupt(timerIsr);
-  // set up Realy Pin
-    pinMode(RealyPin, OUTPUT);
-    digitalWrite(RealyPin, LOW);
+  // set up servo
+    myservo.attach(servo_pin);  // attaches the servo on pin 0 to the servo object
   // End of trinket special code
     pixels.setBrightness(100);
     pixels.begin(); // This initializes the NeoPixel library.
@@ -140,8 +146,16 @@ void loop() {
   }
   else
   {
-    led_ring_color = RED;
-    delay(1000);
+      sprintf (buffer, "cannot recognize");
+      dot_num = 0;
+      display_update(&lcd,buffer);
+      TimerTc3.stop();
+      led_ring_enable(RED);
+      delay(1000);
+      dot_num = 0;
+      sprintf(buffer, ".");
+      display_update(&lcd,buffer);
+      TimerTc3.start();
   }
   
 }
