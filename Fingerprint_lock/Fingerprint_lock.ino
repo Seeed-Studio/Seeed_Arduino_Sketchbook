@@ -31,7 +31,7 @@ const int RealyPin = 0;
 
 char buffer [20];
 
-char name_table[][8]={"None","Hansen","None","None","Junjie"};
+char name_table[][8]={"None","Hansen","None","None","Junjie","None","None","None","None","None"};
 
 rgb_lcd lcd;
 
@@ -88,18 +88,19 @@ void setup() {
   // set up Realy Pin
     pinMode(RealyPin, OUTPUT);
     digitalWrite(RealyPin, LOW);
-    // End of trinket special code
+  // End of trinket special code
     pixels.setBrightness(100);
     pixels.begin(); // This initializes the NeoPixel library.
 }
 
 uint16_t finger_num;
-
+bool open_led_ring;
 void loop() {
-  //The first param is the finger-print ID to check.
-  //if set 0xffff,indicates that search for all the finger-print templates and try to match.
+
   kct202.autoVerifyFingerPrint(CHECK_ALL_FINGER_TEMP,
                             LED_OFF_AFTER_GET_GRAGH | PRETREATMENT_GRAGH | NOT_RET_FOR_EVERY_STEP);
+  //The first param is the finger-print ID to check.
+  //if set 0xffff,indicates that search for all the finger-print templates and try to match.
   debug.println(" ");
   debug.println("Please put your finger on the touchpad.");
   debug.println("To verify your finger print.");
@@ -107,19 +108,20 @@ void loop() {
   debug.println(" ");
   debug.println(" ");
   sprintf(buffer, "Put finger");
-  led_ring_enable(false);
+  open_led_ring = false;
   if (0 == kct202.getVerifyResponAndparse(finger_num)) {
       debug.println("Verify ok!");
       debug.print("Your finger temp id = ");
       debug.println(finger_num, HEX);
       sprintf (buffer, "welcome %s", name_table[finger_num]);
       display_update(&lcd,buffer);
-      led_ring_enable(true);
+      open_led_ring = true;
+      led_ring_enable(open_led_ring);
       open_door();
   }
-  delay(1000);
 }
 void timerIsr()
 {    
   display_update(&lcd,buffer);
+  led_ring_enable(open_led_ring);
 }
