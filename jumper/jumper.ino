@@ -17,11 +17,11 @@
 #include "raw.h"
 char buf[20];
 uint8_t button_state;
-#define debug(...)              //\
+#define debug(...)        \
     Serial.printf(__VA_ARGS__); \
     Serial.println();
 #define debug2(...)       //Serial.printf(__VA_ARGS__); Serial.println();
-#define debug_begin(baud) //Serial.begin(baud); while (!Serial);
+#define debug_begin(baud) Serial.begin(baud);  while(!Serial);
 #define PIN_PLAY BUTTON_3
 #define PIN_JUMP BUTTON_2
 #define PIN_BREAKING_OUT BUTTON_1
@@ -52,7 +52,7 @@ struct raw_image
     }
 };
 
-// location for image 
+// location for image
 enum location : uint8_t
 {
     left_top,
@@ -366,35 +366,64 @@ public:
     void begin()
     {
         debug("load image");
-        raw_actor[run0] = (raw_image *)RUN0;                 //load_image("rgb332/run0.bmp")
-        raw_actor[run1] = (raw_image *)RUN1;                 //load_image("rgb332/run1.bmp");
-        raw_actor[jump] = (raw_image *)JUMP;                 //load_image("rgb332/jump.bmp");
-        raw_actor[breaking_out] = (raw_image *)BREAKING_OUT; //l("rgb332/breaking_out.bmp");
-        raw_actor[failure] = (raw_image *)FAILURE;           //load_image("rgb332/failure.bmp");
-        raw_block[small_block] = (raw_image *)SMALL_BLOCK;   //load_image("rgb332/small_block.bmp");
-        raw_block[big_block] = (raw_image *)BIG_BLOCK;       //load_image("rgb332/big_block.bmp");
-        raw_bird[fly0] = (raw_image *)FLY0;                  //load_image("rgb332/fly0.bmp");
-        raw_bird[fly1] = (raw_image *)FLY1;                  //load_image("rgb332/fly1.bmp");
-        raw_cloud[0] = (raw_image *)CLOUD;                   //load_image("rgb332/cloud.bmp");
-        raw_wire[0] = (raw_image *)WIRE_BMP;                 //load_image("rgb332/wire.bmp");
-        raw_road[0] = (raw_image *)ROAD;                     //load_image("rgb332/road.bmp");
-        raw_count_down[0] = (raw_image *)GO;                 //load_image("rgb332/go.bmp");
-        raw_count_down[1] = (raw_image *)BIG_1;              //load_image("rgb332/big_1.bmp");
-        raw_count_down[2] = (raw_image *)BIG_2;              //load_image("rgb332/big_2.bmp");
-        raw_count_down[3] = (raw_image *)BIG_3;              //load_image("rgb332/big_3.bmp");
-        raw_number[0] = (raw_image *)_0BMP;                  //load_image("rgb332/0.bmp");
-        raw_number[1] = (raw_image *)_1BMP;                  //load_image("rgb332/1.bmp");
-        raw_number[2] = (raw_image *)_2BMP;                  //load_image("rgb332/2.bmp");
-        raw_number[3] = (raw_image *)_3BMP;                  //load_image("rgb332/3.bmp");
-        raw_number[4] = (raw_image *)_4BMP;                  //load_image("rgb332/4.bmp");
-        raw_number[5] = (raw_image *)_5BMP;                  //load_image("rgb332/5.bmp");
-        raw_number[6] = (raw_image *)_6BMP;                  //load_image("rgb332/6.bmp");
-        raw_number[7] = (raw_image *)_7BMP;                  //load_image("rgb332/7.bmp");
-        raw_number[8] = (raw_image *)_8BMP;                  //load_image("rgb332/8.bmp");
-        raw_number[9] = (raw_image *)_9BMP;                  //load_image("rgb332/9.bmp");
-        raw_game_over[0] = (raw_image *)GAME_OVER;           //load_image("rgb332/game_over.bmp");
-        raw_wait_play[0] = (raw_image *)WAIT_PLAY;           //("rgb332/wait_play.bmp");
-        raw_setup[0] = (raw_image *)SETUP;
+        raw_actor[run0] = load_image("rgb332/run0.bmp");
+        raw_actor[run1] = load_image("rgb332/run1.bmp");
+        raw_actor[jump] = load_image("rgb332/jump.bmp");
+        raw_actor[breaking_out] = load_image("rgb332/breaking_out.bmp");
+        raw_actor[failure] = load_image("rgb332/failure.bmp");
+        raw_block[small_block] = load_image("rgb332/small_block.bmp");
+        raw_block[big_block] = load_image("rgb332/big_block.bmp");
+        raw_bird[fly0] = load_image("rgb332/fly0.bmp");
+        raw_bird[fly1] = load_image("rgb332/fly1.bmp");
+        raw_cloud[0] = load_image("rgb332/cloud.bmp");
+        raw_wire[0] = load_image("rgb332/wire.bmp");
+        raw_road[0] = load_image("rgb332/road.bmp");
+        raw_count_down[0] = load_image("rgb332/go.bmp");
+        raw_count_down[1] = load_image("rgb332/big_1.bmp");
+        raw_count_down[2] = load_image("rgb332/big_2.bmp");
+        raw_count_down[3] = load_image("rgb332/big_3.bmp");
+        raw_number[0] = load_image("rgb332/0.bmp");
+        raw_number[1] = load_image("rgb332/1.bmp");
+        raw_number[2] = load_image("rgb332/2.bmp");
+        raw_number[3] = load_image("rgb332/3.bmp");
+        raw_number[4] = load_image("rgb332/4.bmp");
+        raw_number[5] = load_image("rgb332/5.bmp");
+        raw_number[6] = load_image("rgb332/6.bmp");
+        raw_number[7] = load_image("rgb332/7.bmp");
+        raw_number[8] = load_image("rgb332/8.bmp");
+        raw_number[9] = load_image("rgb332/9.bmp");
+        raw_game_over[0] = load_image("rgb332/game_over.bmp");
+        raw_wait_play[0] = load_image("rgb332/wait_play.bmp");
+        raw_setup[0] = (raw_image *)SETUP; // raw_setup[0] = load_image("rgb332/setup.bmp"); // to lager for load from SD Card
+        // raw_actor[run0] = (raw_image *)RUN0;                 //load_image("rgb332/run0.bmp")
+        // raw_actor[run1] = (raw_image *)RUN1;                 //load_image("rgb332/run1.bmp");
+        // raw_actor[jump] = (raw_image *)JUMP;                 //load_image("rgb332/jump.bmp");
+        // raw_actor[breaking_out] = (raw_image *)BREAKING_OUT; //l("rgb332/breaking_out.bmp");
+        // raw_actor[failure] = (raw_image *)FAILURE;           //load_image("rgb332/failure.bmp");
+        // raw_block[small_block] = (raw_image *)SMALL_BLOCK;   //load_image("rgb332/small_block.bmp");
+        // raw_block[big_block] = (raw_image *)BIG_BLOCK;       //load_image("rgb332/big_block.bmp");
+        // raw_bird[fly0] = (raw_image *)FLY0;                  //load_image("rgb332/fly0.bmp");
+        // raw_bird[fly1] = (raw_image *)FLY1;                  //load_image("rgb332/fly1.bmp");
+        // raw_cloud[0] = (raw_image *)CLOUD;                   //load_image("rgb332/cloud.bmp");
+        // raw_wire[0] = (raw_image *)WIRE_BMP;                 //load_image("rgb332/wire.bmp");
+        // raw_road[0] = (raw_image *)ROAD;                     //load_image("rgb332/road.bmp");
+        // raw_count_down[0] = (raw_image *)GO;                 //load_image("rgb332/go.bmp");
+        // raw_count_down[1] = (raw_image *)BIG_1;              //load_image("rgb332/big_1.bmp");
+        // raw_count_down[2] = (raw_image *)BIG_2;              //load_image("rgb332/big_2.bmp");
+        // raw_count_down[3] = (raw_image *)BIG_3;              //load_image("rgb332/big_3.bmp");
+        // raw_number[0] = (raw_image *)_0BMP;                  //load_image("rgb332/0.bmp");
+        // raw_number[1] = (raw_image *)_1BMP;                  //load_image("rgb332/1.bmp");
+        // raw_number[2] = (raw_image *)_2BMP;                  //load_image("rgb332/2.bmp");
+        // raw_number[3] = (raw_image *)_3BMP;                  //load_image("rgb332/3.bmp");
+        // raw_number[4] = (raw_image *)_4BMP;                  //load_image("rgb332/4.bmp");
+        // raw_number[5] = (raw_image *)_5BMP;                  //load_image("rgb332/5.bmp");
+        // raw_number[6] = (raw_image *)_6BMP;                  //load_image("rgb332/6.bmp");
+        // raw_number[7] = (raw_image *)_7BMP;                  //load_image("rgb332/7.bmp");
+        // raw_number[8] = (raw_image *)_8BMP;                  //load_image("rgb332/8.bmp");
+        // raw_number[9] = (raw_image *)_9BMP;                  //load_image("rgb332/9.bmp");
+        // raw_game_over[0] = (raw_image *)GAME_OVER;           //load_image("rgb332/game_over.bmp");
+        // raw_wait_play[0] = (raw_image *)WAIT_PLAY;           //("rgb332/wait_play.bmp");
+        // raw_setup[0] = (raw_image *)SETUP;
         debug("finish load");
     }
 
@@ -681,22 +710,21 @@ private:
         // Serial.print("cc: ");
         // Serial.println(current_point);
         game flag;
-      
-            point center(
-                (screen_width - raw_game_over[0]->width) / 2,
-                (screen_height + raw_game_over[0]->height) / 2);
-            object o(pix_type_ignore, center, raw_game_over);
-            actor.behavior = failure;
-            pan.clean();
-            frame(flag);
-            pan.draw(o);
-            pan.flush();
-            pan.clean();
-            delay(200);
-            frame(flag);
-            pan.flush();
-            delay(200);
-        
+
+        point center(
+            (screen_width - raw_game_over[0]->width) / 2,
+            (screen_height + raw_game_over[0]->height) / 2);
+        object o(pix_type_ignore, center, raw_game_over);
+        actor.behavior = failure;
+        pan.clean();
+        frame(flag);
+        pan.draw(o);
+        pan.flush();
+        pan.clean();
+        delay(200);
+        frame(flag);
+        pan.flush();
+        delay(200);
     }
     void turn_light_on()
     {
@@ -752,8 +780,12 @@ jumper game;
 
 void setup()
 {
-
     debug_begin(115200);
+    while (!SD.begin(SDCARD_SS_PIN,SDCARD_SPI,4000000UL)) {
+        debug("Card Mount Failed");
+        return;
+    }
+    debug("SD Card Mount Successful!");
     tft.init();
     tft.setRotation(3);
     tft.fillScreen(TFT_WHITE);
@@ -762,7 +794,6 @@ void setup()
     zt3.setCompare(0, 920 * 2); //1024div + 920 -> 50hz -> 25hz
     zt3.setCallback(true, TC_CALLBACK_CC_CHANNEL0, push_jump);
     zt3.enable(true);
-
 
     pinMode(BUZZER_CTR, OUTPUT);
 
@@ -776,7 +807,6 @@ void setup()
 }
 void loop()
 {
-   
-      game.play();
-    
+
+    game.play();
 }
