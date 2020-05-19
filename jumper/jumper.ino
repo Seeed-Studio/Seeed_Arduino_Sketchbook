@@ -8,15 +8,6 @@
 #pragma push_macro("max")
 #pragma push_macro("min")
 
-#endif
-#ifdef KENDRYTE_K210
-#include <SPIClass.h>
-#else
-#include <SPI.h>
-#endif
-#include <Seeed_FS.h>
-#include "SD/Seeed_SD.h"
-
 #include "string.h"
 #include "TFT_eSPI.h"
 #include "Adafruit_ZeroTimer.h"
@@ -44,6 +35,7 @@ constexpr int16_t screen_height = 240;
 TFT_eSPI tft;
 Adafruit_ZeroTimer zt3 = Adafruit_ZeroTimer(3);
 
+// imgae class
 struct raw_image
 {
     int16_t width;
@@ -58,6 +50,7 @@ struct raw_image
     }
 };
 
+// location for image 
 enum location : uint8_t
 {
     left_top,
