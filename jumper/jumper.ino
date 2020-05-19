@@ -7,7 +7,9 @@
 #include "algorithm"
 #pragma push_macro("max")
 #pragma push_macro("min")
-
+#endif
+#include <Seeed_FS.h>
+#include "SD/Seeed_SD.h"
 #include "string.h"
 #include "TFT_eSPI.h"
 #include "Adafruit_ZeroTimer.h"
@@ -754,7 +756,6 @@ void setup()
     debug_begin(115200);
     tft.init();
     tft.setRotation(3);
-    tft.setBacklight(2048);
     tft.fillScreen(TFT_WHITE);
 
     zt3.configure(TC_CLOCK_PRESCALER_DIV1024, TC_COUNTER_SIZE_16BIT, TC_WAVE_GENERATION_MATCH_FREQ);
