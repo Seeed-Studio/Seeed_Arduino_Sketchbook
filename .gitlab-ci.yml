@@ -1,0 +1,8 @@
+build:
+  tags:
+    - nas
+  script:
+    - wget -c https://files.seeedstudio.com/arduino/seeed-arduino-ci.sh
+    - chmod +x seeed-arduino-ci.sh
+    - bash $PWD/seeed-arduino-ci.sh Fingerprint_lock:uno/jumper:uno Seeed-Studio/Seeed_Arduino_SFUD Seeed-Studio/Seeed_Arduino_FS adafruit/Adafruit_ZeroTimer Seeed-Studio/Seeed_Arduino_KCT202 arduino-libraries/Servo Seeed-Studio/Grove_LCD_RGB_Backlight adafruit/Adafruit_NeoPixel
+
