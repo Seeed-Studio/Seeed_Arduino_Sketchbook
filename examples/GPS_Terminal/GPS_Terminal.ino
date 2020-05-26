@@ -20,8 +20,6 @@ void setup()
 }
 void loop()
 {
-  
-    spr.fillSprite(TFT_BLACK);
     spr.fillSprite(TFT_BLACK);
     spr.setFreeFont(&FreeSansBoldOblique18pt7b); 
     spr.setTextColor(TFT_GREEN);
