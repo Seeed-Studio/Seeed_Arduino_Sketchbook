@@ -1,21 +1,49 @@
-
 language: generic
 dist: bionic
 sudo: false
 cache:
   directories:
-    - ~/arduino_ide
+    - ~/Arduino
     - ~/.arduino15/packages/
 
+# default phases
 before_install:
-   - wget -c https://files.seeedstudio.com/arduino/seeed-arduino-ci.sh
+  - mkdir -p "$HOME/bin"
+  - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR="$HOME/bin" sh
+  - export PATH="$PATH:$HOME/bin"
+  - arduino-cli core update-index --additional-urls https://downloads.arduino.cc/packages/package_index.json
+  - arduino-cli core update-index --additional-urls http://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
+  - arduino-cli  core install arduino:avr --additional-urls https://downloads.arduino.cc/packages/package_index.json
+  - arduino-cli  core install Seeeduino:samd --additional-urls hhttp://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
+  - |
+    installLibrary() {
+      local -r repositoryFullName="$1"
+      local -r repositoryName="${repositoryFullName##*/}"
+      # clone repository to the libraries folder of the sketchbook
+      git clone https://github.com/${repositoryFullName} "${HOME}/Arduino/libraries/${repositoryName}"
+      cd "${HOME}/Arduino/libraries/${repositoryName}"
+      cd "${TRAVIS_BUILD_DIR}"
+    }
+  - buildExampleSketch() { arduino-cli compile  --warnings all --fqbn $BOARD $PWD/examples/$1 --verbose; }
+  - buildExampleUtilitySketch() { arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/utility/$1 --verbose; }
 
-script:
-   - chmod +x seeed-arduino-ci.sh
-   - cat $PWD/seeed-arduino-ci.sh
-   - bash $PWD/seeed-arduino-ci.sh Fingerprint_lock:uno/jumper:uno Seeed-Studio/Seeed_Arduino_SFUD Seeed-Studio/Seeed_Arduino_FS adafruit/Adafruit_ZeroTimer Seeed-Studio/Seeed_Arduino_KCT202 arduino-libraries/Servo Seeed-Studio/Grove_LCD_RGB_Backlight adafruit/Adafruit_NeoPixel
+install:
+  - mkdir -p $HOME/Arduino/libraries
 
+script: 
+    - echo "*************************************WioTerminal-ADS1115*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary Seeed-Studio/Seeed_Arduino_ADS1115
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal-ADS1115;
+
+    - echo "*************************************WioTerminal-WioTerminal_BackLight*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_BackLight;
 notifications:
-  email:
-    on_success: change
-    on_failure: change
+  webhooks:
+    urls:
+      - https://www.travisbuddy.com/
+    on_success: never
+    on_failure: always
