@@ -42,6 +42,15 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_BackLight;
 
+    - echo "*************************************WioTerminal-jumber*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary Seeed-Studio/Seeed_Arduino_FS
+    - installLibrary Seeed-Studio/Seeed_Arduino_SFUD
+    - installLibrary adafruit/Adafruit_ZeroTimer
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch jumper;
+
+
     - echo "*************************************WioTerminal-Lidar_Terminal*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
     - installLibrary Seeed-Studio/Seeed_Arduino_Linechart
