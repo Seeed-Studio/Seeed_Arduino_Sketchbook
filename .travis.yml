@@ -69,7 +69,7 @@ script:
     - installLibrary adafruit/Adafruit_NeoPixel
     - installLibrary arduino-libraries/Servo
     - installLibrary Seeed-Studio/Grove_LCD_RGB_Backlight
-    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - export BOARD=Seeeduino:samd:seeed_XIAO_m0
     - buildExampleSketch Fingerprint_lock;   
 
 
