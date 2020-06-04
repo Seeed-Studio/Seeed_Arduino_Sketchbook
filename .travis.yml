@@ -12,9 +12,9 @@ before_install:
   - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR="$HOME/bin" sh
   - export PATH="$PATH:$HOME/bin"
   - arduino-cli core update-index --additional-urls https://downloads.arduino.cc/packages/package_index.json
-  - arduino-cli core update-index --additional-urls http://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
+  - arduino-cli core update-index --additional-urls https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
   - arduino-cli core install arduino:avr --additional-urls https://downloads.arduino.cc/packages/package_index.json
-  - arduino-cli core install Seeeduino:samd --additional-urls hhttp://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
+  - arduino-cli core install Seeeduino:samd --additional-urls https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
   - |
     installLibrary() {
       local -r repositoryFullName="$1"
@@ -42,14 +42,13 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_BackLight;
 
-    - echo "*************************************WioTerminal-jumber*********************************************"
+    - echo "*************************************WioTerminal-jumper*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
     - installLibrary Seeed-Studio/Seeed_Arduino_FS
     - installLibrary Seeed-Studio/Seeed_Arduino_SFUD
     - installLibrary adafruit/Adafruit_ZeroTimer
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch jumper;
-
 
     - echo "*************************************WioTerminal-Lidar_Terminal*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
@@ -68,16 +67,11 @@ script:
     - rm -rf $HOME/Arduino/libraries/*
     - installLibrary Seeed-Studio/Seeed_Arduino_KCT202
     - installLibrary adafruit/Adafruit_NeoPixel
+    - installLibrary arduino-libraries/Servo
     - installLibrary Seeed-Studio/Grove_LCD_RGB_Backlight
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch Fingerprint_lock;   
 
-    - echo "*************************************WioTerminal-Fingerprint_lock*********************************************"
-    - rm -rf $HOME/Arduino/libraries/*
-    - installLibrary adafruit/Adafruit_ZeroTimer
-    - installLibrary Seeed-Studio/Seeed_Arduino_FS
-    - export BOARD=Seeeduino:samd:seeed_wio_terminal
-    - buildExampleSketch Fingerprint_lock;
 
 notifications:
   webhooks:
