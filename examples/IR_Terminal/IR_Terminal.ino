@@ -73,8 +73,8 @@ void setup() {
     }
 
     //Once params are extracted, we can release eeMLX90641 array
-
-    MLX90641_SetRefreshRate(MLX90641_address, 0x05); //Set rate to 32Hz
+    
+    MLX90641_SetRefreshRate(MLX90641_address, 0x05); //Set rate to 16Hz
 
     tft.begin();
     tft.setRotation(3);
@@ -91,7 +91,6 @@ void setup() {
 }
 void loop() {
     // draw a large white border for the temperature area
-    // debug.println("MLX90640 IR Array Example");
     Display.fillRect(10, 10, 220, 220, TFT_WHITE);
     for (byte x = 0 ; x < 2 ; x++) {
         int status = MLX90641_GetFrameData(MLX90641_address, MLX90641Frame);
@@ -137,7 +136,7 @@ void DisplayGradient() {
  
   tft.setRotation(4);
  
-  // rip through 150 rows
+  // rip through 70 rows
   for (row = 0; row < 70; row ++) {
  
     // fast way to draw a non-flicker grid--just make every 10 MLX90641To 2x2 as opposed to 3x3
@@ -174,7 +173,7 @@ void DisplayGradient() {
   }
  
 }
- // my fast yet effective color interpolation routine
+// my fast yet effective color interpolation routine
 uint16_t GetColor(float val) {
  
   /*

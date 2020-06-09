@@ -63,7 +63,7 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch GPS_Terminal;   
 
-    - echo "*************************************WioTerminal-Fingerprint_lock*********************************************"
+    - echo "*************************************XIAO-Fingerprint_lock*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
     - installLibrary Seeed-Studio/Seeed_Arduino_KCT202
     - installLibrary adafruit/Adafruit_NeoPixel
@@ -72,6 +72,11 @@ script:
     - export BOARD=Seeeduino:samd:seeed_XIAO_m0
     - buildExampleSketch Fingerprint_lock;   
 
+    - echo "*************************************WioTerminal-IR_Terminal*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary Seeed-Studio/Seeed_Arduino_MLX9064x
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch IR_Terminal;  
 
 notifications:
   webhooks:
