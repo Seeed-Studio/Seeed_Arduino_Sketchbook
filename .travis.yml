@@ -78,6 +78,13 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch IR_Terminal;  
 
+    - echo "*************************************WioTerminal_USB2Serial_Burn8720*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary Seeed-Studio/Seeed_Arduino_LCD
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_USB2Serial_Burn8720;  
+
+
 notifications:
   webhooks:
     urls:
