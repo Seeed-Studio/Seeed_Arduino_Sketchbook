@@ -86,6 +86,7 @@ script:
 
     - echo "*************************************HID_PC_Media_Controller***********************************************************************************"
     - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino-sketch-* 
     - installLibrary adafruit/Adafruit_TinyUSB_Arduino
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/HID_PC_Media_Controller --verbose --build-properties build.flags.usbstack=-DUSE_TINYUSB  
