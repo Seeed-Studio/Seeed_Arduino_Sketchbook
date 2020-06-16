@@ -84,6 +84,11 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_USB2Serial_Burn8720;  
 
+    - echo "*************************************HID_PC_Media_Controller***********************************************************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary adafruit/Adafruit_TinyUSB_Arduino
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/HID_PC_Media_Controller --verbose --build-properties build.flags.usbstack=-DUSE_TINYUSB  
 
 notifications:
   webhooks:
