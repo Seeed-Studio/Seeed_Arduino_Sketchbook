@@ -91,6 +91,17 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/HID_PC_Media_Controller --verbose --build-properties build.flags.usbstack=-DUSE_TINYUSB  
 
+    - echo "*************************************WioTerminal_AWSIoT_Bridge*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary Seeed-Studio/Seeed_Arduino_atWiFi
+    - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
+    - installLibrary Seeed-Studio/Seeed_Arduino_atUnified
+    - installLibrary Seeed-Studio/esp-at-lib
+    - installLibrary knolleary/pubsubclient
+    - installLibrary bblanchon/ArduinoJson
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_AWSIoT_Bridge;
+
 notifications:
   webhooks:
     urls:
