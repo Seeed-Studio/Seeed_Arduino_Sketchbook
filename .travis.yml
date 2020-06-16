@@ -93,6 +93,7 @@ script:
 
     - echo "*************************************WioTerminal_AWSIoT_Bridge*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*
     - installLibrary Seeed-Studio/Seeed_Arduino_atWiFi
     - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
     - installLibrary Seeed-Studio/Seeed_Arduino_atUnified
