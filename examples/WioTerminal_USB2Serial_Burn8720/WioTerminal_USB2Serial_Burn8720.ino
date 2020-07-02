@@ -26,7 +26,7 @@ void key_c_input()
 void setup()
 {
     Serial.begin(115200);
-
+    //Serial1.begin(115200);
     pinMode(WIO_KEY_A, INPUT_PULLUP);
 
     pinMode(WIO_KEY_B, INPUT_PULLUP);
@@ -47,6 +47,9 @@ void loop()
 
     if (state_a == LOW)
     {
+        uint32_t baud;
+
+        uint32_t old_baud;
         while (digitalRead(WIO_KEY_A) == LOW)
             ;
         tft.drawString("Burn RTL8720 fw", 70, 80); //prints string at (70,80)
@@ -62,10 +65,18 @@ void loop()
         pinMode(PIN_SERIAL2_RX, INPUT);
         Serial.beginWithoutDTR(115200);
         //  Serial.baud
-        RTL8720D.begin(115200);
+        old_baud = Serial.baud();
+        RTL8720D.begin(old_baud);
+   
         delay(500);
         while (1)
         {
+            baud = Serial.baud();
+            if(baud != old_baud)
+            {
+               RTL8720D.begin(baud);
+               old_baud = baud;
+            }
             // read from port 1, send to port 0:
 
             if (Serial.available())
@@ -167,4 +178,3 @@ void loop()
 
     }
 }
-
