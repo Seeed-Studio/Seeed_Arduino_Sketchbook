@@ -105,6 +105,7 @@ script:
 
      echo "*************************************WioTerminal_ButtonMouseControl***********************************************************************************"
     - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary  arduino-libraries/Mouse
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_ButtonMouseControl;
 
