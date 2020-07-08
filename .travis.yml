@@ -103,6 +103,11 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_AWSIoT_Bridge;
 
+     echo "*************************************WioTerminal_ButtonMouseControl***********************************************************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_ButtonMouseControl;
+
 notifications:
   webhooks:
     urls:
