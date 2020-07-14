@@ -109,6 +109,17 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_ButtonMouseControl;
 
+    - echo "*************************************WioTerminal_NTP*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - installLibrary Seeed-Studio/Seeed_Arduino_atWiFi
+    - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
+    - installLibrary Seeed-Studio/Seeed_Arduino_atUnified
+    - installLibrary Seeed-Studio/esp-at-lib
+    - installLibrary ansonhe97/millisDelay
+    - installLibrary adafruit/RTClib
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_NTP;
+
 notifications:
   webhooks:
     urls:
