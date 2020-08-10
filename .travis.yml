@@ -133,6 +133,12 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_Https_Stock_Demo;
 
+    - echo "*************************************SeeeduinoXIAO_SPISlave*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*
+    - export BOARD=Seeeduino:samd:seeed_XIAO_m0
+    - buildExampleSketch SeeeduinoXIAO_SPISlave;
+
 notifications:
   webhooks:
     urls:
