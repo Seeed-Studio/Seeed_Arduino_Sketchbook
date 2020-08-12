@@ -24,8 +24,8 @@ before_install:
       cd "${HOME}/Arduino/libraries/${repositoryName}"
       cd "${TRAVIS_BUILD_DIR}"
     }
-  - buildExampleSketch() { arduino-cli compile  --warnings all --fqbn $BOARD $PWD/examples/$1 --verbose; }
-  - buildExampleUtilitySketch() { arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/utility/$1 --verbose; }
+  - buildExampleSketch() { arduino-cli compile  --warnings all --fqbn $BOARD $PWD/examples/$1 ; }
+  - buildExampleUtilitySketch() { arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/utility/$1 ; }
 
 install:
   - mkdir -p $HOME/Arduino/libraries
@@ -138,6 +138,7 @@ script:
     - rm -rf /tmp/arduino*
     - export BOARD=Seeeduino:samd:seeed_XIAO_m0
     - buildExampleSketch SeeeduinoXIAO_SPISlave;
+
 
 notifications:
   webhooks:
