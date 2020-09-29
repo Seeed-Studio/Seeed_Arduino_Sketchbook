@@ -140,6 +140,12 @@ script:
     - buildExampleSketch SeeeduinoXIAO_SPISlave;
 
 
+    - echo "*************************************WioTerminal_UncannyEyes*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_UncannyEyes;
+
+
 notifications:
   webhooks:
     urls:
