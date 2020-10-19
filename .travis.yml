@@ -152,8 +152,7 @@ script:
     - installLibrary Seeed-Studio/Seeed_Arduino_rpcBLE
     - installLibrary Seeed-Studio/Seeed_Arduino_rpcUnified
     - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
-    - installLibrary Seeed-Studio/esp-at-lib
-
+    - installLibrary Seeed-Studio/Seeed_Arduino_LIS3DHTR
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_WebBluetooth;
 
