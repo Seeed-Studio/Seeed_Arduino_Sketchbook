@@ -146,6 +146,17 @@ script:
     - buildExampleSketch WioTerminal_UncannyEyes;
 
 
+    - echo "*************************************WioTerminal_WebBluetooth*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcBLE
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcUnified
+    - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
+    - installLibrary Seeed-Studio/esp-at-lib
+
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_WebBluetooth;
+
 notifications:
   webhooks:
     urls:
