@@ -164,6 +164,15 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_AttitudeIndicator;
 
+    - echo "*************************************WioTerminal_face*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*    
+    - installLibrary PaintYourDragon/Servo
+    - installLibrary lovyan03/LovyanGFX
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_face;
+
+
 notifications:
   webhooks:
     urls:
