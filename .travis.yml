@@ -156,6 +156,14 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_WebBluetooth;
 
+    - echo "*************************************WioTerminal_AttitudeIndicator*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*    
+    - installLibrary Seeed-Studio/Seeed_Arduino_LIS3DHTR
+    - installLibrary lovyan03/LovyanGFX
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_AttitudeIndicator;
+
 notifications:
   webhooks:
     urls:
