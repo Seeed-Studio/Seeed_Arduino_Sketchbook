@@ -172,6 +172,16 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_face;
 
+    - echo "*************************************WioTerminal_MP3_Player*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*    
+    - installLibrary Seeed-Studio/Seeed_Serial_MP3_Player
+    - installLibrary lovyan03/LovyanGFX
+    - installLibrary Seeed-Studio/Seeed_Arduino_FS
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_MP3_Player;
+
+
 
 notifications:
   webhooks:
