@@ -179,6 +179,7 @@ script:
     - installLibrary lovyan03/LovyanGFX
     - installLibrary Seeed-Studio/Seeed_Arduino_FS
     - installLibrary Seeed-Studio/Seeed_Arduino_LCD
+    - installLibrary Seeed-Studio/Seeed_Arduino_SFUD
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_MP3_Player;
 
