@@ -29,7 +29,7 @@ Here [pyserial](https://pypi.org/project/pyserial/), [psutil](https://pypi.org/p
 - Navigate to the location of the folder containing the .py file on command prompt
 ```sh
 Example:
-C:\Users\user\Desktop>Wio_Terminal_PC_Stats
+C:\Users\user\Desktop>WioTerminal_PC_Stats
 ```
 - Run the .py using the below command 
 ```python
