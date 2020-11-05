@@ -15,7 +15,7 @@
    MIT license, all text above must be included in any redistribution
  ***********************************************************************************/
 
-#include <AtWiFi.h>
+#include <rpcWiFi.h>
 #include <PubSubClient.h> 
 #include <ArduinoJson.h>
 

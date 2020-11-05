@@ -94,10 +94,9 @@ script:
     - echo "*************************************WioTerminal_AWSIoT_Bridge*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
     - rm -rf /tmp/arduino*
-    - installLibrary Seeed-Studio/Seeed_Arduino_atWiFi
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcWiFi
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcUnified
     - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
-    - installLibrary Seeed-Studio/Seeed_Arduino_atUnified
-    - installLibrary Seeed-Studio/esp-at-lib
     - installLibrary knolleary/pubsubclient
     - installLibrary bblanchon/ArduinoJson
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
@@ -111,9 +110,9 @@ script:
 
     - echo "*************************************WioTerminal_NTP*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
-    - installLibrary Seeed-Studio/Seeed_Arduino_atWiFi
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcWiFi
     - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
-    - installLibrary Seeed-Studio/Seeed_Arduino_atUnified
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcUnified
     - installLibrary Seeed-Studio/esp-at-lib
     - installLibrary ansonhe97/millisDelay
     - installLibrary adafruit/RTClib
@@ -123,12 +122,9 @@ script:
     - echo "*************************************WioTerminal_Https_Stock_Demo*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
     - rm -rf /tmp/arduino*
-    - installLibrary Seeed-Studio/Seeed_Arduino_atWiFi
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcWiFi
+    - installLibrary Seeed-Studio/Seeed_Arduino_rpcUnified
     - installLibrary Seeed-Studio/Seeed_Arduino_FreeRTOS
-    - installLibrary Seeed-Studio/Seeed_Arduino_atUnified
-    - installLibrary Seeed-Studio/Seeed_Arduino_atWiFiClientSecure
-    - installLibrary Seeed-Studio/Seeed_Arduino_mbedtls
-    - installLibrary Seeed-Studio/esp-at-lib
     - installLibrary bblanchon/ArduinoJson
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_Https_Stock_Demo;

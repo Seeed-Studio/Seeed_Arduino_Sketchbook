@@ -34,7 +34,7 @@ Notes:
 // comment out to use remote server
 #define USELOCALNTP
 
-#include <AtWiFi.h>
+#include <rpcWiFi.h>
 #include <millisDelay.h>
 #include <Wire.h>
 #include <RTClib.h>
