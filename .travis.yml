@@ -24,8 +24,8 @@ before_install:
       cd "${HOME}/Arduino/libraries/${repositoryName}"
       cd "${TRAVIS_BUILD_DIR}"
     }
-  - buildExampleSketch() { arduino-cli compile  --warnings all --fqbn $BOARD $PWD/examples/$1 ; }
-  - buildExampleUtilitySketch() { arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/utility/$1 ; }
+  - buildExampleSketch() { arduino-cli compile --fqbn $BOARD $PWD/examples/$1 ; }
+  - buildExampleUtilitySketch() { arduino-cli compile --fqbn $BOARD $PWD/examples/utility/$1 ; }
 
 install:
   - mkdir -p $HOME/Arduino/libraries
@@ -89,7 +89,7 @@ script:
     - rm -rf /tmp/arduino*
     - installLibrary adafruit/Adafruit_TinyUSB_Arduino
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
-    - arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/HID_PC_Media_Controller --verbose --build-properties build.flags.usbstack=-DUSE_TINYUSB  
+    - arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/HID_PC_Media_Controller --build-properties build.flags.usbstack=-DUSE_TINYUSB  
 
     - echo "*************************************WioTerminal_AWSIoT_Bridge*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
