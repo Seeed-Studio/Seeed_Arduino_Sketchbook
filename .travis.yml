@@ -183,6 +183,36 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_MP3_Player;
 
+    - echo "*************************************WioTerminal_Level*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*    
+    - installLibrary Seeed-Studio/Seeed_Arduino_LIS3DHTR
+    - installLibrary Seeed-Studio/Seeed_Arduino_FS
+    - installLibrary Seeed-Studio/Seeed_Arduino_LCD
+    - installLibrary Seeed-Studio/Seeed_Arduino_SFUD
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_Level;
+
+    - echo "*************************************WioTerminal_Timer*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*    
+    - installLibrary lovyan03/LovyanGFX
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_Timer;
+
+    - echo "*************************************WioTerminal_GPS*********************************************"
+    - rm -rf $HOME/Arduino/libraries/*
+    - rm -rf /tmp/arduino*    
+    - installLibrary lovyan03/LovyanGFX
+    - installLibrary mikalhart/TinyGPSPlus
+    - installLibrary Seeed-Studio/Seeed_Arduino_FS
+    - installLibrary Seeed-Studio/Seeed_Arduino_LCD
+    - installLibrary Seeed-Studio/Seeed_Arduino_SFUD
+    - export BOARD=Seeeduino:samd:seeed_wio_terminal
+    - buildExampleSketch WioTerminal_GPS;
+
+    
+
 
 
 notifications:
