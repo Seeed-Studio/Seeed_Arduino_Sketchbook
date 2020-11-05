@@ -1,6 +1,5 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
-#include <Seeed_erpcUnified.h>
 #include <LIS3DHTR.h>
 
 #define accelerometerService "19b10000-e8f2-537e-4f6c-d104768a1214"
