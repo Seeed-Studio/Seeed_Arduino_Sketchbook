@@ -164,13 +164,13 @@ script:
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_AttitudeIndicator;
 
-    - echo "*************************************WioTerminal_face*********************************************"
+    - echo "*************************************WioTerminal_Face*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
     - rm -rf /tmp/arduino*    
     - installLibrary PaintYourDragon/Servo
     - installLibrary lovyan03/LovyanGFX
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
-    - buildExampleSketch WioTerminal_face;
+    - buildExampleSketch WioTerminal_Face;
 
     - echo "*************************************WioTerminal_MP3_Player*********************************************"
     - rm -rf $HOME/Arduino/libraries/*
@@ -205,8 +205,8 @@ script:
     - rm -rf /tmp/arduino*    
     - installLibrary lovyan03/LovyanGFX
     - installLibrary mikalhart/TinyGPSPlus
-    - installLibrary Seeed-Studio/Seeed_Arduino_FS
     - installLibrary Seeed-Studio/Seeed_Arduino_LCD
+    - installLibrary Seeed-Studio/Seeed_Arduino_FS
     - installLibrary Seeed-Studio/Seeed_Arduino_SFUD
     - export BOARD=Seeeduino:samd:seeed_wio_terminal
     - buildExampleSketch WioTerminal_GPS;
