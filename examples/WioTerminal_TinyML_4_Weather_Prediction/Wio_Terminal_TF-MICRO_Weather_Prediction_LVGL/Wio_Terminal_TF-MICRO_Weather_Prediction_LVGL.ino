@@ -33,7 +33,7 @@ namespace {
 // Most recent position in the save_data buffer
 int begin_index = 0;
 unsigned long previousMillis = 0;
-const long interval = 1000*5; //*60*60; //1 hour
+const long interval = 1000*60*60; //1 hour
 
 int freeMemory() {
   char top;
