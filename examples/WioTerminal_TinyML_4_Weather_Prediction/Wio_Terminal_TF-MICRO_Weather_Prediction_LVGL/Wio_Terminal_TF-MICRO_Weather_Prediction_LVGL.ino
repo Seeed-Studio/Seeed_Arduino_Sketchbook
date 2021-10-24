@@ -10,21 +10,22 @@
 #include "model_Conv1D.h"
 #include "Seeed_BME280.h"
 #include <Wire.h>
-#include <MemoryFree.h>
+
+#define DEBUG 0
 
 BME280 bme280;
 
 // Globals, used for compatibility with Arduino-style sketches.
 namespace {
-tflite::ErrorReporter* error_reporter = nullptr;
-const tflite::Model* model = nullptr;
-tflite::MicroInterpreter* interpreter = nullptr;
-TfLiteTensor* input = nullptr;
-TfLiteTensor* output_type = nullptr;
-TfLiteTensor* output_precip = nullptr;
-
-constexpr int kTensorArenaSize = 1024*10;
-uint8_t tensor_arena[kTensorArenaSize];
+  tflite::ErrorReporter* error_reporter = nullptr;
+  const tflite::Model* model = nullptr;
+  tflite::MicroInterpreter* interpreter = nullptr;
+  TfLiteTensor* input = nullptr;
+  TfLiteTensor* output_type = nullptr;
+  TfLiteTensor* output_precip = nullptr;
+  
+  constexpr int kTensorArenaSize = 1024*10;
+  uint8_t tensor_arena[kTensorArenaSize];
 }  // namespace
 
 // A buffer holding the last 24 sets of 3-channel values
@@ -32,8 +33,12 @@ uint8_t tensor_arena[kTensorArenaSize];
 // Most recent position in the save_data buffer
 int begin_index = 0;
 unsigned long previousMillis = 0;
-const long interval = 1000*60*60; //1 hour
+const long interval = 1000*5; //*60*60; //1 hour
 
+int freeMemory() {
+  char top;
+  return &top - reinterpret_cast<char*>(sbrk(0));
+}
 
 void collect_data() {
   
@@ -102,10 +107,15 @@ void print_buffer() {
 void setup() {
 
   Serial.begin(115200);
-  //while (!Serial) { delay(10); }
-  if (!bme280.init()) { LogTFT("Sensor init error!\n"); while (1) {} }
+  
+#if DEBUG == 1
+  while (!Serial) {delay(10);}
+#endif
+
   setupLVGL();
-  update_screen(bme280.getTemperature(),  bme280.getPressure()/100, bme280.getHumidity(), 0.0, 0);
+  if (!bme280.init()) { LogTFT("Sensor init error!\n"); while (1) {} }
+
+  update_screen(bme280.getTemperature(),  bme280.getPressure()/100, bme280.getHumidity(), 50.0, 0);
   setupWIFI();
   getCurrent();
   getHistorical();
