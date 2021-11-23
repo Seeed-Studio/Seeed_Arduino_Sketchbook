@@ -1,5 +1,7 @@
 # TinyML Course 4 IoT Weather Prediction (TensorFlow Micro)
 
+To run test on static data you will need sufficiently new version of Tensorflow Lite for Microcontrollers. Read on how to get it in [Seeed Wiki](https://wiki.seeedstudio.com/Wio-Terminal-TinyML-TFLM-1/#install-the-arduino-tensorflow-lite-library).
+
 To run LVGL example you need:
 
 1) Install WiFi libraries as specified [here](https://wiki.seeedstudio.com/Wio-Terminal-Network-Overview/). Before flashing RTL8720 firmware, check if you already have latest version by uploading the following code
@@ -16,7 +18,7 @@ void setup() {
 void loop() {
 }
 ```
-If you already have the lastest code and libraries for WiFi, proceed to the next step.
+If you already have the latest code and libraries for WiFi, proceed to the next step.
 
 2) Install [ArduinoJson](https://github.com/bblanchon/ArduinoJson) 6.18.5. You can find it by searching for "ArduinoJson" in Arduino IDE libraries mananger.
 
